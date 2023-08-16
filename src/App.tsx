@@ -1,8 +1,9 @@
-function App() {
+import { handleSignInWithGoogle } from "./firebase/authentication"
 
+function App() {
   return (
     <>
-      huhh
+      <button onClick={handleSignInWithGoogle}>Google</button>
     </>
   )
 }
