@@ -4,11 +4,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import './index.scss'
 
 import SignupPage from './pages/SignupPage';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <div>I'm the home page</div>
+        element: <HomePage />
     },
     {
       path: "/signup",
