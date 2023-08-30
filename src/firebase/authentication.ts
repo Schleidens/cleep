@@ -1,12 +1,11 @@
 import { auth } from "./main";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, UserCredential, signInWithPopup, signOut } from "firebase/auth";
 
-export const handleSignInWithGoogle = async () => {
+export const handleSignInWithGoogle = async (): Promise<UserCredential> => {
   const googleAuthProvider = new GoogleAuthProvider();
-
-  try {
-    await signInWithPopup(auth, googleAuthProvider);
-  } catch (e) {
-    console.error(e);
-  }
+  return await signInWithPopup(auth, googleAuthProvider);
 };
+
+export const handleSignOut = async (): Promise<void> => {
+  return await signOut(auth)
+}

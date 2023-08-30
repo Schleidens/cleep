@@ -1,17 +1,27 @@
-import { Navigate } from "react-router-dom";
-
 import { handleSignInWithGoogle } from "../firebase/authentication";
+import { useState } from "react";
 
-function SignupPage() {
-  const isUserAuthenticated = localStorage.getItem("token");
+const SignupPage: React.FC = () => {
 
-  if (isUserAuthenticated) {
-    return <Navigate to="/" />;
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleSignIn = async (): Promise<void> => {
+    try {
+      await handleSignInWithGoogle();
+    } catch (error) {
+      if(error instanceof Error){
+        setErrorMessage(error.message)
+      }else{
+        setErrorMessage("Something's wrong try again :)")
+      }
+    }
   }
 
   return (
     <>
-      <button onClick={handleSignInWithGoogle}>Google</button>
+      <button onClick={handleSignIn}>Google</button>
+
+      <span>{errorMessage}</span>
     </>
   );
 }
