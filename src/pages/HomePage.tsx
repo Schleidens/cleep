@@ -8,6 +8,7 @@ const HomePage: React.FC = () => {
   const signOutUser = async (): Promise<void> =>{
     try {
       await handleSignOut();
+      window.location.reload();
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message)
