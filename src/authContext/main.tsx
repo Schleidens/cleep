@@ -3,6 +3,8 @@ import { context } from "./context";
 import { User } from "firebase/auth";
 import { auth } from "../firebase/main";
 
+import Loader from "../components/loader";
+
 const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(auth.currentUser);
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,7 +40,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   // Display a loading message while loading
   if (loading) {
-    return <div>loading</div>;
+    return <Loader />;
   }
 
   // Provide the user context to child components

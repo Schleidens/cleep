@@ -1,0 +1,52 @@
+.main {
+	height: 100vh;
+	width: 100%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__dot {
+		width: 12px;
+		height: 12px;
+		margin: 0 6px;
+		background-color: #fec871; /* Adjust the color as needed */
+		border-radius: 50%;
+		animation: pulse 1.5s infinite;
+
+		&:nth-child(2) {
+			animation-delay: 0.2s;
+			background-color: #fd9a71;
+		}
+
+		&:nth-child(3) {
+			animation-delay: 0.3s;
+			background-color: #e3ed8e;
+		}
+
+		&:nth-child(4) {
+			animation-delay: 0.4s;
+			background-color: #b490fb;
+		}
+
+		&:nth-child(5) {
+			animation-delay: 0.5s;
+			background-color: #00d3fe;
+		}
+	}
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+		opacity: 0.7;
+	}
+	50% {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 0.7;
+	}
+}
