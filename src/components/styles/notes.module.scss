@@ -1,0 +1,35 @@
+.main {
+	height: 200px;
+	width: 20%;
+	min-width: 200px;
+
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+
+	background-color: #fec871;
+
+	padding: 1em;
+
+	border-radius: 20px;
+
+	text-align: left;
+
+	h3 {
+		margin: 0;
+	}
+
+	&__details {
+		display: flex;
+		justify-content: space-between;
+
+		button {
+			background: none;
+			border: none;
+
+			color: #fff;
+
+			font-size: 1.3em;
+		}
+	}
+}
