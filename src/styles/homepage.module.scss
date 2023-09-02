@@ -16,6 +16,10 @@
 
 		padding: 0 1em;
 
+		@media (max-width: 768px) {
+			display: none;
+		}
+
 		.logo {
 			margin-top: 1em;
 			a {
@@ -87,6 +91,11 @@
 					font-weight: bold;
 					margin: 0;
 				}
+			}
+
+			&__box {
+				display: flex;
+				gap: 10px;
 			}
 		}
 	}
