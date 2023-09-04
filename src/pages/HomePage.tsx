@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { handleSignOut } from "../firebase/authentication"
@@ -6,11 +6,18 @@ import { handleSignOut } from "../firebase/authentication"
 import style from "../styles/homepage.module.scss"
 
 import Notes from "../components/notes";
+import NewNoteModal from "../components/newNoteModal";
 
 import { IoIosDocument } from "react-icons/io"
 import { BiLogOutCircle, BiPlusCircle } from "react-icons/bi"
 
 const HomePage: React.FC = () => {
+
+  const [displayModal, setDisplayModal] = useState<boolean>(false);
+
+  const toggleModal = useCallback((): void =>{
+    setDisplayModal((prev) => !prev)
+  }, [])
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -36,7 +43,7 @@ const HomePage: React.FC = () => {
             </div>
 
             <div>
-              <button className={style.plus}>
+              <button onClick={toggleModal} className={style.plus}>
                 <BiPlusCircle />
               </button>
             </div>
@@ -46,6 +53,8 @@ const HomePage: React.FC = () => {
             <button onClick={signOutUser} className={style.logout}><BiLogOutCircle /></button>
           </div>
         </div>
+
+        <NewNoteModal toggleModal={toggleModal} displayModalValue={displayModal ? "flex" : "none"} />
 
         <div className={style.main__box}>
           <div className={style.brand}>
