@@ -1,9 +1,16 @@
+.disable {
+	filter: blur(1px);
+	pointer-events: none;
+}
+
 .main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
 	position: fixed;
+
+	z-index: 3;
 
 	height: 100vh;
 	width: 100%;

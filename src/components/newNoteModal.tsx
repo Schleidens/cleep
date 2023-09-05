@@ -3,6 +3,11 @@ import style from "./styles/newnotemodal.module.scss";
 
 import { MdClose, MdOutlineCheckCircleOutline } from "react-icons/md";
 
+import { useAuth } from "../authContext/context";
+
+import { createNotes } from "../firebase/notes";
+import { Timestamp } from "firebase/firestore";
+
 interface Modal {
   displayModalValue: string;
   toggleModal: () => void;
@@ -25,8 +30,63 @@ const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
     setSelectedColor(event.target.value);
   };
 
+  const [title, setTitle] = useState<string | undefined>("");
+  const [content, setContent] = useState<string | undefined>("");
+
+  //get the current user from context
+  const { user } = useAuth();
+
+  // list of all data
+  const noteData = {
+    title,
+    content,
+    color: selectedColor,
+    lastEdit: Timestamp.now(),
+    userId: user?.uid,
+  };
+
+  //clear the value of input also radio color
+  const clearInputValue = (): void => {
+    setTitle("");
+    setContent("");
+    setSelectedColor("#fff");
+  };
+
+  //disable the modal state
+  const [disableModal, setDisableModal] = useState<boolean>(false);
+
+  // create new note using firebase firestore with a custom function in notes.ts
+  const handleCreateNewNote = async (): Promise<void> => {
+    try {
+      //disable the modal when sending data to the server
+      setDisableModal(true);
+
+      //send the data
+      await createNotes(noteData);
+
+      //call the toggleModal func from the parent component to unDisplay the modal
+      toggleModal();
+
+      //clear the input value
+      clearInputValue();
+
+      /* re-enable the modal again,
+      imagine user wanna add new notes no need to refresh the entire state */
+      setDisableModal(false);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      } else {
+        console.log("wrong :)");
+      }
+    }
+  };
+
   return (
-    <div className={style.main} style={{ display: displayModalValue }}>
+    <div
+      className={` ${style.main} ${disableModal ? style.disable : ""}`}
+      style={{ display: displayModalValue }}
+    >
       <div
         className={style.main__modal}
         style={{ backgroundColor: selectedColor }}
@@ -38,16 +98,23 @@ const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
 
         <div className={style.form}>
           {/* INPUT FORM */}
-          <input type="text" placeholder="Title" />
-          <textarea placeholder="Write a new note...."></textarea>
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+            placeholder="Write a new note...."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
           {/* END */}
 
           {/* FOOTER */}
           <div className={style.footer}>
-
             {/* RADIO BTN LIST */}
             <div className={style.radios}>
-
               {radioColorList.map((color, index) => (
                 <div key={index}>
                   <input
@@ -70,19 +137,16 @@ const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
                   </label>
                 </div>
               ))}
-
             </div>
             {/* END RADIO */}
 
             {/* SAVE BTN */}
             <div className={style.save}>
-              <button>SAVE</button>
+              <button onClick={handleCreateNewNote}>SAVE</button>
             </div>
             {/* END OF SAVE BTN */}
-
           </div>
           {/* END */}
-          
         </div>
       </div>
     </div>
