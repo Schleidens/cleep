@@ -65,6 +65,10 @@ const HomePage: React.FC = () => {
       <div className={style.main__box}>
         <div className={style.brand}>
           <h1>CLEEP</h1>
+
+          <button onClick={signOutUser} className={style.brand__logout}>
+            <BiLogOutCircle />
+          </button>
         </div>
 
         <div className={style.notes}>
@@ -74,6 +78,12 @@ const HomePage: React.FC = () => {
 
           <div className={style.notes__box}>
             <Notes />
+          </div>
+
+          <div className={style.notes__new}>
+            <button onClick={toggleModal} className={style.plus}>
+              <BiPlusCircle />
+            </button>
           </div>
         </div>
       </div>

@@ -1,3 +1,42 @@
+@mixin logout($mb) {
+	background-color: #fec871;
+	color: #fff;
+
+	font-size: 1.5em;
+
+	padding: 0.1em;
+	margin-bottom: $mb;
+
+	border-radius: 50px;
+	border: none;
+
+	line-height: 0;
+
+	transition: 0.3s;
+
+	&:hover {
+		background-color: #faad32;
+	}
+}
+
+@mixin plusBtn($mt, $fs) {
+	border: none;
+	background: none;
+
+	font-size: $fs;
+
+	color: #fd9a71;
+
+	padding: 0;
+	margin-top: $mt;
+
+	transition: 1s ease-in;
+
+	:hover {
+		color: #f87138;
+	}
+}
+
 .main {
 	display: flex;
 
@@ -30,42 +69,11 @@
 		}
 
 		.plus {
-			border: none;
-			background: none;
-
-			font-size: 2em;
-
-			color: #fd9a71;
-
-			padding: 0;
-			margin-top: 1em;
-
-			transition: 1s ease-in;
-
-			:hover {
-				color: #f87138;
-			}
+			@include plusBtn(1em, 2em);
 		}
 
 		.logout {
-			background-color: #fec871;
-			color: #fff;
-
-			font-size: 1.5em;
-
-			padding: 0.1em;
-			margin-bottom: 1em;
-
-			border-radius: 50px;
-			border: none;
-
-			line-height: 0;
-
-			transition: 0.3s;
-
-			&:hover {
-				background-color: #faad32;
-			}
+			@include logout(1em);
 		}
 	}
 
@@ -76,8 +84,24 @@
 		.brand {
 			width: 100%;
 
+			display: flex;
+			justify-content: space-between;
+
 			h1 {
 				margin: 0;
+			}
+
+			&__logout {
+				@include logout(0);
+
+				height: 40px;
+				width: 40px;
+
+				line-height: 1;
+
+				@media (min-width: 768px) {
+					display: none;
+				}
 			}
 		}
 
@@ -96,6 +120,23 @@
 			&__box {
 				display: flex;
 				gap: 10px;
+			}
+
+			&__new {
+				position: fixed;
+				bottom: 40px;
+				right: 40px;
+
+				.plus {
+					@include plusBtn(0, 4em);
+
+					height: 70px;
+					width: 70px;
+				}
+
+				@media (min-width: 768px) {
+					display: none;
+				}
 			}
 		}
 	}
