@@ -127,6 +127,8 @@
 				bottom: 40px;
 				right: 40px;
 
+				z-index: 2;
+
 				.plus {
 					@include plusBtn(0, 4em);
 
