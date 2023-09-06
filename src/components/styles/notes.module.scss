@@ -12,6 +12,8 @@
 
 	border-radius: 20px;
 
+	box-sizing: border-box;
+
 	text-align: left;
 
 	@media (max-width: 768px) {
@@ -25,6 +27,10 @@
 	&__details {
 		display: flex;
 		justify-content: space-between;
+
+		div {
+			font-size: 12px;
+		}
 
 		button {
 			background: none;

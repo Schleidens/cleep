@@ -119,6 +119,7 @@
 
 			&__box {
 				display: flex;
+				flex-wrap: wrap;
 				gap: 10px;
 			}
 
@@ -126,6 +127,8 @@
 				position: fixed;
 				bottom: 40px;
 				right: 40px;
+
+				z-index: 2;
 
 				.plus {
 					@include plusBtn(0, 4em);
