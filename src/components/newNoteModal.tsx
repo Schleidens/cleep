@@ -8,6 +8,8 @@ import { useAuth } from "../authContext/context";
 import { createNotes } from "../firebase/notes";
 import { Timestamp } from "firebase/firestore";
 
+import { noteDataModel } from "../ts/noteDataModel";
+
 interface Modal {
   displayModalValue: string;
   toggleModal: () => void;
@@ -36,12 +38,15 @@ const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
   //get the current user from context
   const { user } = useAuth();
 
+  const lastEdit = Timestamp.now().toDate().toISOString();
+
   // list of all data
-  const noteData = {
+  const noteData: noteDataModel = {
+    id: "",
     title,
     content,
     color: selectedColor,
-    lastEdit: Timestamp.now(),
+    lastEdit: lastEdit,
     userId: user?.uid,
   };
 
