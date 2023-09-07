@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
     return new Date(incomingDate).toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "2-digit",
-      year: "2-digit",
+      year: "numeric",
     });
   };
 
@@ -115,6 +115,7 @@ const HomePage: React.FC = () => {
 
       <NewNoteModal
         toggleModal={toggleModal}
+        updateData={fetchNotes}
         displayModalValue={displayModal ? "flex" : "none"}
       />
 

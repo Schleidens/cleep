@@ -13,9 +13,14 @@ import { noteDataModel } from "../ts/noteDataModel";
 interface Modal {
   displayModalValue: string;
   toggleModal: () => void;
+  updateData: () => void;
 }
 
-const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
+const NewNoteModal: React.FC<Modal> = ({
+  displayModalValue,
+  toggleModal,
+  updateData,
+}) => {
   const radioColorList = [
     "#fec871",
     "#fd9a71",
@@ -74,6 +79,9 @@ const NewNoteModal: React.FC<Modal> = ({ displayModalValue, toggleModal }) => {
 
       //clear the input value
       clearInputValue();
+
+      //update data in homepage by recalling the fetchNote function
+      updateData();
 
       /* re-enable the modal again,
       imagine user wanna add new notes no need to refresh the entire state */
