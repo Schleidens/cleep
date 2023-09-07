@@ -1,0 +1,55 @@
+.main {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+
+	&__boxes {
+		height: 200px;
+		width: 19.3%;
+
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+
+		background-color: #fcfcfc;
+
+		padding: 1em;
+
+		border: 0.5px solid #f3eeee;
+		border-radius: 20px;
+
+		box-sizing: border-box;
+
+		text-align: left;
+
+		background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+		background-size: 200% 100%;
+		animation: loading 1.5s infinite;
+
+		@media (max-width: 1244px) {
+			width: 19%;
+		}
+
+		@media (max-width: 900px) {
+			width: 24%;
+		}
+
+		@media (max-width: 850px) {
+			width: 32%;
+		}
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+	}
+}
+
+@keyframes loading {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}

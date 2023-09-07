@@ -8,11 +8,12 @@ import style from "../styles/homepage.module.scss";
 
 import Notes from "../components/notes";
 import NewNoteModal from "../components/newNoteModal";
+import NotesSkeleton from "../components/notesSkeleton";
 
 import { useAuth } from "../authContext/context";
 
 import { IoIosDocument } from "react-icons/io";
-import { BiLogOutCircle, BiPlusCircle } from "react-icons/bi";
+import { BiLogOutCircle, BiPlusCircle, BiPlus } from "react-icons/bi";
 
 import { noteDataModel } from "../ts/noteDataModel";
 
@@ -41,6 +42,18 @@ const HomePage: React.FC = () => {
     }
   };
 
+  //function to get a short version of title for better UI and prevent messy overflow
+  const shortifyTitle = (title: string | undefined) => {
+    const words = title?.split(" ");
+    const shortenedTitle = words?.slice(0, 5).join(" ");
+
+    if (words && words?.length <= 5) {
+      return title;
+    } else {
+      return shortenedTitle + "...";
+    }
+  };
+
   //function to format date notes from firebase timestamp
   const formatDate = (incomingDate: string | number | Date) => {
     return new Date(incomingDate).toLocaleDateString("en-GB", {
@@ -50,15 +63,19 @@ const HomePage: React.FC = () => {
     });
   };
 
+  //loading statement
+  const [loading, setLoading] = useState<boolean>(false);
   //notes array
   const [notes, setNotes] = useState<noteDataModel[] | null>([]);
   //get the User info from context
   const { user } = useAuth();
-  //fetch the notes with useCallback to prevent re-render infinite
+  //fetch the notes with useCallback to prevent infinite re-render
   const fetchNotes = useCallback(async (): Promise<void> => {
     try {
+      setLoading(true);
       const notes = await getNotes(user?.uid);
       setNotes(notes);
+      setLoading(false);
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -115,20 +132,24 @@ const HomePage: React.FC = () => {
             <h2>Notes</h2>
           </div>
 
-          <div className={style.notes__box}>
-            {notes?.map((note) => (
-              <Notes
-                key={note.id}
-                title={note.title}
-                bgColor={note.color}
-                lastEdit={formatDate(note.lastEdit)}
-              />
-            ))}
-          </div>
+          {loading ? (
+            <NotesSkeleton />
+          ) : (
+            <div className={style.notes__box}>
+              {notes?.map((note) => (
+                <Notes
+                  key={note.id}
+                  title={shortifyTitle(note.title)}
+                  bgColor={note.color}
+                  lastEdit={formatDate(note.lastEdit)}
+                />
+              ))}
+            </div>
+          )}
 
           <div className={style.notes__new}>
             <button onClick={toggleModal} className={style.plus}>
-              <BiPlusCircle />
+              <BiPlus />
             </button>
           </div>
         </div>

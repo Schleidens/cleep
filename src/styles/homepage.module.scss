@@ -12,8 +12,6 @@
 
 	line-height: 0;
 
-	transition: 0.3s;
-
 	&:hover {
 		background-color: #faad32;
 	}
@@ -133,8 +131,18 @@
 				.plus {
 					@include plusBtn(0, 4em);
 
+					background-color: #fff;
+
+					border-radius: 20px;
+
+					line-height: 0;
+
 					height: 70px;
 					width: 70px;
+
+					box-shadow: 1px 1px 5px 0px rgba(254, 200, 113, 1);
+					-webkit-box-shadow: 1px 1px 5px 0px rgba(254, 200, 113, 1);
+					-moz-box-shadow: 1px 1px 5px 0px rgba(254, 200, 113, 1);
 				}
 
 				@media (min-width: 768px) {
