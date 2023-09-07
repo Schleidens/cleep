@@ -1,6 +1,6 @@
 .main {
 	height: 200px;
-	width: 20%;
+	width: 19.3%;
 
 	display: flex;
 	justify-content: space-between;
@@ -10,11 +10,24 @@
 
 	padding: 1em;
 
+	border: 0.5px solid #f3eeee;
 	border-radius: 20px;
 
 	box-sizing: border-box;
 
 	text-align: left;
+
+	@media (max-width: 1244px) {
+		width: 19%;
+	}
+
+	@media (max-width: 900px) {
+		width: 24%;
+	}
+
+	@media (max-width: 850px) {
+		width: 32%;
+	}
 
 	@media (max-width: 768px) {
 		width: 100%;
