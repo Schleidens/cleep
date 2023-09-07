@@ -12,7 +12,7 @@ import NewNoteModal from "../components/newNoteModal";
 import { useAuth } from "../authContext/context";
 
 import { IoIosDocument } from "react-icons/io";
-import { BiLogOutCircle, BiPlusCircle } from "react-icons/bi";
+import { BiLogOutCircle, BiPlusCircle, BiPlus } from "react-icons/bi";
 
 import { noteDataModel } from "../ts/noteDataModel";
 
@@ -128,7 +128,7 @@ const HomePage: React.FC = () => {
 
           <div className={style.notes__new}>
             <button onClick={toggleModal} className={style.plus}>
-              <BiPlusCircle />
+              <BiPlus />
             </button>
           </div>
         </div>
