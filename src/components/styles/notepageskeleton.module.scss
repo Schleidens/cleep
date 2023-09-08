@@ -1,0 +1,30 @@
+.skeleton {
+	height: 100%;
+	min-height: 80vh;
+	max-width: 800px;
+	width: 800px;
+
+	margin: 2em 0.5em;
+	padding: 1em;
+
+	border: 0.5px solid #f3eeee;
+	border-radius: 20px;
+
+	background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	animation: loading 1.5s infinite;
+
+	@media (max-width: 768px) {
+		margin: 1em 0.5em;
+		min-height: 90vh;
+	}
+}
+
+@keyframes loading {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}

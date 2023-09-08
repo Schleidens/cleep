@@ -1,7 +1,7 @@
 import { db } from "./main";
-import { collection, addDoc, getDocs, query, orderBy, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, doc, query, orderBy, where } from "firebase/firestore";
 
-import { noteDataModel } from "../ts/noteDataModel";
+import { noteDataModel, singleNoteDataModel } from "../ts/noteDataModel";
 
 
 export const createNotes = async ( noteData: noteDataModel): Promise<void> => {
@@ -45,5 +45,18 @@ export const getNotes = async (userId: unknown): Promise<noteDataModel[]> => {
   } catch (error) {
     console.error('Error while fetching documents: ', error);
     throw error;
+  }
+}
+
+
+export const getSingleNote = async (docId: string | undefined): Promise<singleNoteDataModel | null> => {
+  const docRef = doc(db, 'notes', docId || '');
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const noteData = docSnap.data() as singleNoteDataModel;
+    return noteData; // Return the fetched note data
+  } else {
+    return null; // Return null when the document doesn't exist
   }
 }

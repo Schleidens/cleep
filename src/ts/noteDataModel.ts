@@ -6,3 +6,11 @@ export interface noteDataModel {
   userId: string | undefined;
   lastEdit: string | number | Date;
 }
+
+export interface singleNoteDataModel {
+  title: string | undefined;
+  content: string | undefined;
+  color: string | undefined;
+  userId: string | undefined;
+  lastEdit: string | number | Date;
+}
