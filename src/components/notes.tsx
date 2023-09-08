@@ -1,17 +1,22 @@
+import { Link } from "react-router-dom";
+
 import style from "./styles/notes.module.scss";
 
 import { FiEdit } from "react-icons/fi";
 
 interface noteModel {
+  id: string | undefined;
   title: string | undefined;
   bgColor: string | undefined;
   lastEdit: string | undefined;
 }
 
-const Notes: React.FC<noteModel> = ({ title, bgColor, lastEdit }) => {
+const Notes: React.FC<noteModel> = ({ id, title, bgColor, lastEdit }) => {
   return (
     <div className={style.main} style={{ backgroundColor: bgColor }}>
-      <h3>{title}</h3>
+      <Link to={`/${id}`}>
+        <h3>{title}</h3>
+      </Link>
 
       <div className={style.main__details}>
         <div>{lastEdit}</div>
