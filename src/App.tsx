@@ -4,6 +4,7 @@ import { useAuth } from "./authContext/context";
 
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
+import NotePage from "./pages/NotePage";
 
 const App: React.FC = () => {
     const { user } = useAuth();
@@ -26,6 +27,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="*" element={<Navigate to="/" replace />} />
                         <Route path="/" element={<HomePage />} />
+                        <Route path="/:id" element={<NotePage />} />
                     </Routes>
                 </BrowserRouter>
             </>
