@@ -16,6 +16,7 @@ import { IoIosDocument } from "react-icons/io";
 import { BiLogOutCircle, BiPlusCircle, BiPlus } from "react-icons/bi";
 
 import { noteDataModel } from "../ts/noteDataModel";
+import { formatDate } from "../ts/formatDate";
 
 const HomePage: React.FC = () => {
   //state for the modal
@@ -52,15 +53,6 @@ const HomePage: React.FC = () => {
     } else {
       return shortenedTitle + "...";
     }
-  };
-
-  //function to format date notes from firebase timestamp
-  const formatDate = (incomingDate: string | number | Date) => {
-    return new Date(incomingDate).toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
   };
 
   //loading statement
@@ -140,6 +132,7 @@ const HomePage: React.FC = () => {
               {notes?.map((note) => (
                 <Notes
                   key={note.id}
+                  id={note.id}
                   title={shortifyTitle(note.title)}
                   bgColor={note.color}
                   lastEdit={formatDate(note.lastEdit)}
