@@ -1,41 +1,102 @@
 .main {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
 
-	.back {
-		font-size: 2em;
+  .back {
+    font-size: 2em;
 
-		color: #000;
+    color: #000;
 
-		position: absolute;
-		top: 10px;
-		left: 10px;
-	}
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
 
-	&__note {
-		height: 100%;
-		min-height: 80vh;
-		max-width: 800px;
-		width: 800px;
+  .delete_popup {
+    position: absolute;
+    bottom: 30px;
+    right: 15px;
 
-		margin: 2em 0.5em;
-		padding: 1em;
+    padding: 1em 10px;
 
-		border: 0.5px solid #f3eeee;
-		border-radius: 20px;
+    background-color: #fc6c6c;
+    color: #fff;
+  }
 
-		@media (max-width: 768px) {
-			margin: 1em 0.5em;
-			min-height: 90vh;
-		}
+  &__note {
+    height: 100%;
+    min-height: 80vh;
+    max-width: 800px;
+    width: 800px;
 
-		.content {
-			font-size: 1.2em;
-			height: 100%;
-		}
+    margin: 2em 0.5em;
+    padding: 1em;
 
-		.footer {
-			font-size: 10px;
-		}
-	}
+    border: 0.5px solid #f3eeee;
+    border-radius: 20px;
+
+    @media (max-width: 768px) {
+      margin: 1em 0.5em;
+      min-height: 90vh;
+    }
+
+    .content {
+      font-size: 1.2em;
+
+      height: 100%;
+      min-height: 70vh;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 13px;
+
+      span:first {
+        line-height: 1;
+      }
+
+      span button {
+        outline: none;
+        border: none;
+        background: none;
+
+        font-size: 3em;
+
+        border-radius: 50px;
+        height: 50px;
+        width: 50px;
+        line-height: 1;
+
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.431372549);
+
+          svg {
+            animation: bounce 2s infinite;
+          }
+        }
+
+        @keyframes bounce {
+          0%,
+          20%,
+          50%,
+          80%,
+          100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-15px);
+          }
+          60% {
+            transform: translateY(-10px);
+          }
+        }
+      }
+    }
+  }
 }
