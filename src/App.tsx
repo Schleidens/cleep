@@ -47,6 +47,15 @@ const App: React.FC = () => {
               }
             />
             <Route
+              path='/signup'
+              element={
+                <Navigate
+                  to='/'
+                  replace
+                />
+              }
+            />
+            <Route
               path='/'
               element={<HomePage />}
             />
