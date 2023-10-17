@@ -18,12 +18,15 @@ const Notes: React.FC<noteModel> = ({ id, title, bgColor, lastEdit }) => {
       style={{ backgroundColor: bgColor }}
     >
       <Link to={`/${id}`}>
-        <h3>{title}</h3>
+        {title ? <h3>{title}</h3> : <h3>Untitled Note</h3>}
       </Link>
 
       <div className={style.main__details}>
         <div>{lastEdit}</div>
-        <Link to={`/edit/${id}`}>
+        <Link
+          to={`/edit/${id}`}
+          style={{ color: bgColor === '#fff' ? '#000' : '#fff' }}
+        >
           <FiEdit />
         </Link>
       </div>
