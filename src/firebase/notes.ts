@@ -15,7 +15,7 @@ import {
 import {
   noteDataModel,
   singleNoteDataModel,
-  updateDataModel,
+  updateNoteDataModel,
 } from '../ts/noteDataModel';
 
 export const createNotes = async (noteData: noteDataModel): Promise<void> => {
@@ -31,7 +31,7 @@ export const createNotes = async (noteData: noteDataModel): Promise<void> => {
 
 export const updateNotes = async (
   docId: string | undefined,
-  updateData: updateDataModel
+  updateData: updateNoteDataModel
 ): Promise<void> => {
   try {
     await updateDoc(doc(db, 'notes', docId || ''), updateData);

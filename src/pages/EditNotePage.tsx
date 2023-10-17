@@ -1,28 +1,44 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import style from '../styles/editnotepage.module.scss';
 
 import { IoMdArrowRoundBack } from 'react-icons/io';
 
 import NotePageSkeleton from '../components/notePageSkeleton';
 
-import { getSingleNote } from '../firebase/notes';
-import { singleNoteDataModel } from '../ts/noteDataModel';
+import { Timestamp } from 'firebase/firestore';
+import { getSingleNote, updateNotes } from '../firebase/notes';
+import { updateNoteDataModel } from '../ts/noteDataModel';
 
 const EditNotePage: React.FC = () => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  //loading statement
+  const lastEdit = Timestamp.now().toDate().toISOString();
+
   const [loading, setLoading] = useState<boolean>(false);
-  //note
-  const [note, setNote] = useState<singleNoteDataModel | null>(null);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [bgColor, setBgColor] = useState<string | undefined>('');
+
+  const [updateNote, setUpdateNote] = useState<updateNoteDataModel>({
+    title: '',
+    content: '',
+    lastEdit: lastEdit,
+  });
 
   const fetchSingleNote = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
+
       const note = await getSingleNote(id);
-      setNote(note);
+      //set data for note in value and color for th BG
+      setUpdateNote((prev) => ({
+        ...prev,
+        title: note?.title,
+        content: note?.content,
+      }));
+      setBgColor(note?.color);
+
       setLoading(false);
     } catch (error) {
       if (error instanceof Error) {
@@ -33,9 +49,27 @@ const EditNotePage: React.FC = () => {
     }
   }, [id]);
 
+  const handleSaving = async (): Promise<void> => {
+    try {
+      setIsSaving(true);
+
+      await updateNotes(id, updateNote);
+
+      setIsSaving(false);
+      navigate(`/${id}`); //redirect to the note page
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+      } else {
+        console.log('An error occurred while trying to update data');
+      }
+    }
+  };
+
   useEffect(() => {
     fetchSingleNote();
   }, [fetchSingleNote]);
+
   return (
     <div className={style.main}>
       {!loading && (
@@ -51,24 +85,28 @@ const EditNotePage: React.FC = () => {
       ) : (
         <div
           className={style.main__note}
-          style={{ backgroundColor: note?.color }}
+          style={{ backgroundColor: bgColor }}
         >
           <input
             className={style.title}
             type='text'
-            name=''
-            value={note?.title}
-            id=''
+            value={updateNote.title}
+            onChange={(e) =>
+              setUpdateNote((prev) => ({ ...prev, title: e.target.value }))
+            }
           />
           <textarea
             className={style.content}
-            name=''
-            id=''
-            value={note?.content}
+            value={updateNote.content}
+            onChange={(e) =>
+              setUpdateNote((prev) => ({ ...prev, content: e.target.value }))
+            }
           ></textarea>
 
           <div className={style.footer}>
-            <button>Save</button>
+            <button onClick={handleSaving}>
+              {isSaving ? 'Saving...' : 'Save'}
+            </button>
           </div>
         </div>
       )}
