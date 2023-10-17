@@ -1,62 +1,66 @@
 .main {
-	height: 200px;
-	width: 19.3%;
+  height: 200px;
+  width: 19.3%;
 
-	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
-	background-color: #fec871;
+  background-color: #fec871;
 
-	padding: 1em;
+  padding: 1em;
 
-	border: 0.5px solid #f3eeee;
-	border-radius: 20px;
+  border: 0.5px solid #f3eeee;
+  border-radius: 20px;
 
-	box-sizing: border-box;
+  box-sizing: border-box;
 
-	text-align: left;
+  text-align: left;
 
-	@media (max-width: 1244px) {
-		width: 19%;
-	}
+  @media (max-width: 1244px) {
+    width: 19%;
+  }
 
-	@media (max-width: 900px) {
-		width: 24%;
-	}
+  @media (max-width: 900px) {
+    width: 24%;
+  }
 
-	@media (max-width: 850px) {
-		width: 32%;
-	}
+  @media (max-width: 850px) {
+    width: 32%;
+  }
 
-	@media (max-width: 768px) {
-		width: 100%;
-	}
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 
-	a {
-		text-decoration: none;
-	}
+  a {
+    text-decoration: none;
 
-	h3 {
-		margin: 0;
-		color: #000;
-	}
+    svg {
+      font-size: 18px;
+    }
+  }
 
-	&__details {
-		display: flex;
-		justify-content: space-between;
+  h3 {
+    margin: 0;
+    color: #000;
+  }
 
-		div {
-			font-size: 12px;
-		}
+  &__details {
+    display: flex;
+    justify-content: space-between;
 
-		button {
-			background: none;
-			border: none;
+    div {
+      font-size: 12px;
+    }
 
-			color: #fff;
+    button {
+      background: none;
+      border: none;
 
-			font-size: 1.3em;
-		}
-	}
+      color: #fff;
+
+      font-size: 1.3em;
+    }
+  }
 }

@@ -2,6 +2,7 @@ import { db } from './main';
 import {
   collection,
   addDoc,
+  updateDoc,
   getDocs,
   getDoc,
   deleteDoc,
@@ -11,7 +12,11 @@ import {
   where,
 } from 'firebase/firestore';
 
-import { noteDataModel, singleNoteDataModel } from '../ts/noteDataModel';
+import {
+  noteDataModel,
+  singleNoteDataModel,
+  updateNoteDataModel,
+} from '../ts/noteDataModel';
 
 export const createNotes = async (noteData: noteDataModel): Promise<void> => {
   try {
@@ -20,6 +25,18 @@ export const createNotes = async (noteData: noteDataModel): Promise<void> => {
     console.log('Note created successfully with ID: ', docRef.id);
   } catch (error) {
     console.error('Error creating note: ', error);
+    throw error;
+  }
+};
+
+export const updateNotes = async (
+  docId: string | undefined,
+  updateData: updateNoteDataModel
+): Promise<void> => {
+  try {
+    await updateDoc(doc(db, 'notes', docId || ''), updateData);
+  } catch (error) {
+    console.log('An error occurred while trying to update data', error);
     throw error;
   }
 };

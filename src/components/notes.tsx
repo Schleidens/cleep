@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import style from "./styles/notes.module.scss";
+import style from './styles/notes.module.scss';
 
-import { FiEdit } from "react-icons/fi";
+import { FiEdit } from 'react-icons/fi';
 
 interface noteModel {
   id: string | undefined;
@@ -13,16 +13,22 @@ interface noteModel {
 
 const Notes: React.FC<noteModel> = ({ id, title, bgColor, lastEdit }) => {
   return (
-    <div className={style.main} style={{ backgroundColor: bgColor }}>
+    <div
+      className={style.main}
+      style={{ backgroundColor: bgColor }}
+    >
       <Link to={`/${id}`}>
-        <h3>{title}</h3>
+        {title ? <h3>{title}</h3> : <h3>Untitled Note</h3>}
       </Link>
 
       <div className={style.main__details}>
         <div>{lastEdit}</div>
-        <button>
+        <Link
+          to={`/edit/${id}`}
+          style={{ color: bgColor === '#fff' ? '#000' : '#fff' }}
+        >
           <FiEdit />
-        </button>
+        </Link>
       </div>
     </div>
   );
