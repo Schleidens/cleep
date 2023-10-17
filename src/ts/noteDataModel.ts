@@ -7,6 +7,12 @@ export interface noteDataModel {
   lastEdit: string | number | Date;
 }
 
+export type updateDataModel = {
+  title: string;
+  content: string;
+  lastEdit: Date;
+};
+
 export interface singleNoteDataModel {
   title: string | undefined;
   content: string | undefined;
